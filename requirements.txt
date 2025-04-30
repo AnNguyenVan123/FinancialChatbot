@@ -25,3 +25,5 @@ cassio
 python-dotenv
 
 gradio
+
+matplotlib
