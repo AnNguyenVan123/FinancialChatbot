@@ -66,7 +66,7 @@ class StockMetadataInput(BaseModel):
 
 stock_metadata_tool = StructuredTool.from_function(
     name="StockMetadataTool",
-    description="Use this tool to answer questions about a company's stock using metadata from DynamoDB.",
+    description="Lấy thông tin cơ bản về công ty Việt NamNam . Input: mã cổ phiếu hoặc tên công ty  (ví dụ: Vingroup hoặc VHM).",
     func=query_stock_metadata,
     args_schema=StockMetadataInput
 )

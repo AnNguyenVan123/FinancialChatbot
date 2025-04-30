@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 from dotenv import load_dotenv
+
 import requests
 import matplotlib.pyplot as plt
 import datetime
@@ -82,9 +83,7 @@ def get_financial_statement(symbol: str) -> str:
     net_income = latest_report.get("netIncome", "N/A")
     return f"{symbol}: Doanh thu: {revenue} USD, Lợi nhuận ròng: {net_income} USD."
 
-# def get_stock_metadata(symbol:str) -> str :
-#     return symbol
-     
+
 
 
 # 5. Giải thích thuật ngữ tài chính (simple LLM based)

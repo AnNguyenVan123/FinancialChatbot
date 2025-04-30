@@ -1,15 +1,22 @@
-from functions import get_stock_price, draw_stock_chart, get_financial_statement, explain_financial_term, compare_stocks ,suggest_investment_ideas ,summarize_financial_news
+from functions import get_company_info ,get_stock_price, draw_stock_chart, get_financial_statement, explain_financial_term, compare_stocks ,suggest_investment_ideas ,summarize_financial_news
 #from functions import get_stock_price
 from langchain.tools import Tool
-from stock_metadata_tool import stock_metadata_tool
+from tools.query_VN_financial_statement_tool import query_VN_financial_statement_tool
+from tools.stock_metadata_tool import stock_metadata_tool
+from tools.get_VN_stock_price_tool import VN_stock_price_tool
 
 # ==== Các tool ====
 
 
 
 tools = [
-  stock_metadata_tool
+    stock_metadata_tool
     ,
+    
+    query_VN_financial_statement_tool ,
+    VN_stock_price_tool
+    ,
+    
 
     Tool(
         name="get_stock_price",
@@ -23,18 +30,18 @@ tools = [
         func=draw_stock_chart
     ),
 
-    # Tool(
-    #     name="get_company_info",
-    #     description="Lấy thông tin cơ bản về công ty. Input: mã cổ phiếu (ví dụ: MSFT).",
-    #     func=get_company_info
-    # ),
+    Tool(
+        name="get_company_info",
+        description="Lấy thông tin cơ bản về công ty mỹ . Input: mã cổ phiếu hoặc tên công ty  (ví dụ: MSFT).",
+        func=get_company_info
+    ),
 
-    # Tool(
-    #     name="get_financial_statement",
-    #     description="Lấy báo cáo tài chính của công ty. Input: mã cổ phiếu (ví dụ: AMZN).",
-    #     func=get_financial_statement
-    # ),
-
+    Tool(
+        name="get_financial_statement",
+        description="Lấy báo cáo tài chính của công ty. Input: mã cổ phiếu (ví dụ: AMZN).",
+        func=get_financial_statement
+    ),
+    
     Tool(
         name="explain_financial_term",
         description="Giải thích một thuật ngữ tài chính bất kỳ. Input: tên thuật ngữ (ví dụ: EBITDA, PE ratio).",
