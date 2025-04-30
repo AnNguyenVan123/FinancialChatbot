@@ -1,0 +1,27 @@
+# Core LangChain and extensions
+langchain
+langchain-community
+langchain-google-genai
+langchain_huggingface
+
+# Vector stores and embedding tools
+sentence-transformers
+qdrant-client
+astrapy
+
+# Tokenizer
+tiktoken
+
+# Data & cloud
+datasets
+boto3
+
+# UI
+streamlit
+
+# Optional: Hugging Face utils
+cassio
+
+python-dotenv
+
+gradio
