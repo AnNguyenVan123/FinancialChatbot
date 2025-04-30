@@ -27,3 +27,5 @@ python-dotenv
 gradio
 
 matplotlib
+
+vnstock
