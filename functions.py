@@ -84,8 +84,6 @@ def get_financial_statement(symbol: str) -> str:
     return f"{symbol}: Doanh thu: {revenue} USD, Lợi nhuận ròng: {net_income} USD."
 
 
-
-
 # 5. Giải thích thuật ngữ tài chính (simple LLM based)
 def explain_financial_term(term: str) -> str:
     # Có thể call LLM Gemini hoặc viết từ điển đơn giản trước

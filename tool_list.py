@@ -1,29 +1,31 @@
 from functions import get_company_info ,get_stock_price, draw_stock_chart, get_financial_statement, explain_financial_term, compare_stocks ,suggest_investment_ideas ,summarize_financial_news
 #from functions import get_stock_price
 from langchain.tools import Tool
-from tools.query_VN_financial_statement_tool import query_VN_financial_statement_tool
-from tools.stock_metadata_tool import stock_metadata_tool
+from tools.coin_price_tool import get_current_coin_price_tool
+from tools.get_VN_financial_statement_tool import query_VN_financial_statement_tool
+from tools.get_VN_stock_metadata_tool import stock_metadata_tool
 from tools.get_VN_stock_price_tool import VN_stock_price_tool
-
+from tools.draw_VN_stock_chart import draw_VN_stock_chart_tool
+from tools.draw_coin_chart import draw_coin_chart_tool
+from tools.get_today_tool import get_time_tool
 # ==== Các tool ====
-
-
 
 tools = [
     stock_metadata_tool
     ,
+    draw_coin_chart_tool ,
+    get_current_coin_price_tool ,
     
     query_VN_financial_statement_tool ,
-    VN_stock_price_tool
+    VN_stock_price_tool ,
+    draw_VN_stock_chart_tool
     ,
-    
-
+    get_time_tool,
     Tool(
         name="get_stock_price",
         description="Lấy giá cổ phiếu hiện tại. Input: mã cổ phiếu (ví dụ: AAPL).",
         func=get_stock_price
     ),
-
     Tool(
         name="draw_stock_chart",
         description="Vẽ biểu đồ giá cổ phiếu theo khoảng thời gian. Input: mã cổ phiếu (ví dụ: AAPL), start_date (YYYY-MM-DD), end_date (YYYY-MM-DD).",

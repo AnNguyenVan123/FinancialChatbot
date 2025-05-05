@@ -29,3 +29,7 @@ gradio
 matplotlib
 
 vnstock
+
+plotly
+
+mplfinance
