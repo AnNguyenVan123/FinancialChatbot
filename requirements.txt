@@ -34,4 +34,4 @@ plotly
 
 mplfinance
 
-binance
+python-binance
