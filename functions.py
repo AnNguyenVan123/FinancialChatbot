@@ -3,6 +3,8 @@ import pandas as pd
 from datetime import datetime
 from dotenv import load_dotenv
 
+from langchain_google_genai import ChatGoogleGenerativeAI
+
 import requests
 import matplotlib.pyplot as plt
 import datetime
@@ -104,5 +106,9 @@ def suggest_investment_ideas() -> str:
 # 8. Tóm tắt tin tức tài chính (giả lập)
 def summarize_financial_news(keyword: str) -> str:
     return f"Tóm tắt nhanh tin tức liên quan đến {keyword}: thị trường đang có nhiều biến động do lãi suất và chính sách tiền tệ."
+def chatbot_general_response(prompt: str) -> str:
+    """Cho phép LLM trả lời các câu hỏi chung chung không cần dùng công cụ."""
+    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.7)
+    return llm.invoke(prompt).content
 
 
