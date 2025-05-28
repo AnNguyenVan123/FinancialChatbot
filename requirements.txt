@@ -33,3 +33,7 @@ vnstock
 plotly
 
 mplfinance
+
+python-binance
+
+tavily-python

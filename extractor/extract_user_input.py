@@ -5,35 +5,33 @@ from langchain_core.messages import BaseMessage
 from langchain_core.prompts import PromptTemplate
 
 def extract_user_facts(llm, user_input: str) -> Dict:
-    """
-    Use LLM to extract key-value information from user's question.
-    """
-    extraction_prompt = PromptTemplate.from_template("""
-    Trích xuất các thông tin liên quan từ câu sau đây. Chỉ đưa ra các cặp khóa–giá trị có ý nghĩa.
-    Trả về kết quả ở dạng JSON không cần chú thích chỉ cần trả lời đúng dạng. 
+    from langchain_core.prompts import PromptTemplate
+    import json
+
+    prompt = PromptTemplate.from_template("""
+    Trích xuất các thông tin quan trọng dưới dạng JSON. 
+    Chỉ trả về một object JSON duy nhất, không thêm bất kỳ văn bản nào khác.
+    
     Ví dụ: {{ "name": "An", "balance": 15000000, "interest": "VHM báo cáo tài chính" }}
-    Câu người dùng: {user_input}
+    
+    Câu: {user_input}
     """)
 
-    chain = extraction_prompt | llm
-    response = chain.invoke({"user_input": user_input})
+    response = (prompt | llm).invoke({"user_input": user_input})
 
-    # Safely get string content
-    raw_output = response.content if isinstance(response, BaseMessage) else str(response)
-    print("Raw response:", raw_output)
+    content = response.content if isinstance(response, BaseMessage) else str(response)
+    print("Raw response:", content)
 
-    # Extract JSON object using regex
-    match = re.search(r'\{.*?\}', raw_output, re.DOTALL)
-    if match:
-        try:
-            extracted = json.loads(match.group(0))
-            
-        except json.JSONDecodeError as e:
-            print("JSON decode error:", e)
-          
-    else:
-        print("No valid JSON object found in response.")
-        extracted = {}
+    # Xử lý nghiêm ngặt JSON
+    try:
+        first_brace = content.find('{')
+        last_brace = content.rfind('}') + 1
+        json_part = content[first_brace:last_brace]
+        data = json.loads(json_part)
+    except Exception as e:
+        print("Lỗi parse JSON:", e)
+        data = {}
 
-    return extracted
+    return data
+
 
